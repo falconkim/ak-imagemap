@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Image Map Editor</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Remix Icons for modern design icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body class="dark-theme">
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Header / Toolbar -->
+    <header class="app-header">
+      <div class="header-logo">
+        <i class="ri-map-pin-range-line logo-icon"></i>
+        <h1>AK Image Map Editor</h1>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="toolbar-section">
+        <button id="btn-new" class="tool-btn" title="새 프로젝트 (Ctrl+N)">
+          <i class="ri-file-add-line"></i>
+          <span>새 프로젝트</span>
+        </button>
+        <div class="dropdown-container">
+          <button id="btn-load-img-dropdown" class="tool-btn" title="이미지 불러오기">
+            <i class="ri-image-add-line"></i>
+            <span>이미지 로드</span>
+            <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+          </button>
+          <div class="dropdown-menu" id="img-dropdown-menu">
+            <button id="btn-load-local" class="dropdown-item">
+              <i class="ri-folder-open-line"></i> 로컬 파일 불러오기
+            </button>
+            <button id="btn-load-url" class="dropdown-item">
+              <i class="ri-global-line"></i> 웹 URL 주소로 로드
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <!-- Drawing Tools -->
+      <div class="toolbar-section drawing-tools">
+        <button id="tool-select" class="tool-btn active" title="선택 및 수정 툴 (V)">
+          <i class="ri-cursor-line"></i>
+          <span>선택/수정</span>
+        </button>
+        <button id="tool-rect" class="tool-btn" title="사각형 그리기 (R)">
+          <i class="ri-checkbox-blank-line"></i>
+          <span>사각형</span>
+        </button>
+        <button id="tool-circle" class="tool-btn" title="원형 그리기 (C)">
+          <i class="ri-checkbox-blank-circle-line"></i>
+          <span>원</span>
+        </button>
+        <button id="tool-poly" class="tool-btn" title="다각형 그리기 (P)">
+          <i class="ri-pentagon-line"></i>
+          <span>다각형</span>
+        </button>
+        <button id="tool-hand" class="tool-btn" title="화면 이동 툴 (Space + Drag)">
+          <i class="ri-hand"></i>
+          <span>핸드툴</span>
+        </button>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <!-- Zoom and Grid Controls -->
+      <div class="toolbar-section view-controls">
+        <button id="btn-zoom-out" class="tool-btn compact" title="축소 (Ctrl + -)">
+          <i class="ri-zoom-out-line"></i>
+        </button>
+        <span id="zoom-level" class="zoom-value">100%</span>
+        <button id="btn-zoom-in" class="tool-btn compact" title="확대 (Ctrl + =)">
+          <i class="ri-zoom-in-line"></i>
+        </button>
+        <button id="btn-zoom-fit" class="tool-btn" title="화면 맞춤 (Ctrl + 0)">
+          <i class="ri-aspect-ratio-line"></i>
+          <span>맞춤</span>
+        </button>
+        <button id="btn-zoom-width" class="tool-btn" title="폭 맞춤">
+          <i class="ri-expand-left-right-line"></i>
+          <span>폭 맞춤</span>
+        </button>
+        
+        <div class="divider compact"></div>
+        
+        <button id="btn-toggle-grid" class="tool-btn compact" title="그리드 보기 토글 (G)">
+          <i class="ri-grid-line"></i>
+        </button>
+        <button id="btn-toggle-snap" class="tool-btn compact" title="그리드 스냅 토글 (S)">
+          <i class="ri-magnet-line"></i>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Undo/Redo & Map Info -->
+      <div class="toolbar-section project-controls">
+        <button id="btn-undo" class="tool-btn compact" disabled title="되돌리기 (Ctrl+Z)">
+          <i class="ri-arrow-go-back-line"></i>
+        </button>
+        <button id="btn-redo" class="tool-btn compact" disabled title="다시 실행 (Ctrl+Y)">
+          <i class="ri-arrow-go-forward-line"></i>
+        </button>
+        
+        <div class="divider compact"></div>
+
+        <div class="map-id-input-container">
+          <label for="input-map-id">Map ID</label>
+          <input type="text" id="input-map-id" value="image-map" placeholder="usemap id">
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button id="btn-load-project" class="action-btn secondary" title="프로젝트 JSON 파일 열기">
+          <i class="ri-folder-shared-line"></i>
+          <span>불러오기</span>
+        </button>
+        <button id="btn-save-project" class="action-btn secondary" title="프로젝트 JSON으로 저장">
+          <i class="ri-save-3-line"></i>
+          <span>프로젝트 저장</span>
+        </button>
+        <button id="btn-export-html" class="action-btn primary" title="HTML 코드로 내보내기">
+          <i class="ri-file-code-line"></i>
+          <span>HTML 내보내기</span>
+        </button>
+      </div>
+    </header>
+    
+    <!-- Workspace -->
+    <main class="app-workspace">
+      
+      <!-- Left Panel: Navigator & Layers -->
+      <aside class="panel left-panel">
+        <div class="panel-section navigator-section">
+          <div class="panel-section-header">
+            <h3><i class="ri-navigation-line"></i> 내비게이터</h3>
+            <div style="display: flex; gap: 4px;">
+              <button id="btn-nav-zoom-out" class="panel-action-btn" title="섬네일 축소"><i class="ri-zoom-out-line"></i></button>
+              <button id="btn-nav-zoom-1to1" class="panel-action-btn" title="섬네일 1:1 맞춤"><i class="ri-focus-2-line"></i></button>
+              <button id="btn-nav-zoom-width" class="panel-action-btn" title="섬네일 폭 맞춤"><i class="ri-expand-left-right-line"></i></button>
+              <button id="btn-nav-zoom-in" class="panel-action-btn" title="섬네일 확대"><i class="ri-zoom-in-line"></i></button>
+            </div>
+          </div>
+          <div class="minimap-container">
+            <div id="minimap-viewer" class="minimap-viewer">
+              <div id="minimap-content" class="minimap-content">
+                <img id="minimap-img" src="" alt="" style="display: none;">
+                <div id="minimap-viewport" class="minimap-viewport"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel-section layers-section">
+          <div class="panel-section-header">
+            <h3><i class="ri-stack-line"></i> 레이어 리스트</h3>
+            <button id="btn-delete-area" class="panel-action-btn" title="선택 레이어 삭제 (Delete)" disabled>
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </div>
+          <div class="layer-list-container">
+            <ul id="layer-list" class="layer-list">
+              <li class="empty-state">그려진 영역이 없습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Center Main Work Canvas Area -->
+      <section class="canvas-viewport" id="canvas-viewport">
+        <!-- Grid overlay -->
+        <div id="grid-overlay" class="grid-overlay" style="display: none;"></div>
+        
+        <!-- Interactive Canvas Holder -->
+        <div id="canvas-container" class="canvas-container">
+          <canvas id="image-canvas"></canvas>
+          <!-- SVG Overlay for precise handles rendering and dragging shapes -->
+          <svg id="svg-overlay" class="svg-overlay"></svg>
+        </div>
+        
+        <!-- Welcome Overlay when no image is loaded -->
+        <div id="welcome-overlay" class="welcome-overlay">
+          <div class="welcome-card">
+            <i class="ri-image-2-line welcome-icon"></i>
+            <h2>이미지를 로드해 주세요</h2>
+            <p>상단 메뉴의 로컬 이미지 로드 혹은 웹 이미지 주소를 입력하여 작업을 시작할 수 있습니다.</p>
+            <div class="welcome-actions">
+              <button id="welcome-btn-local" class="btn"><i class="ri-computer-line"></i> 로컬 이미지</button>
+              <button id="welcome-btn-url" class="btn"><i class="ri-global-line"></i> 웹 URL 이미지</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Right Panel: Properties & Code -->
+      <aside class="panel right-panel">
+        <div id="right-panel-resizer" class="panel-resizer-left"></div>
+        <!-- Selected Shape Properties -->
+        <div class="panel-section properties-section">
+          <div class="panel-section-header">
+            <h3><i class="ri-equalizer-line"></i> 선택 영역 속성</h3>
+          </div>
+          <div class="properties-container" id="properties-panel" class="disabled">
+            <div class="property-group">
+              <label for="prop-type">영역 타입</label>
+              <input type="text" id="prop-type" readonly value="선택 없음">
+            </div>
+            
+            <div class="property-group">
+              <label for="prop-name">레이어 이름</label>
+              <input type="text" id="prop-name" placeholder="영역 이름" disabled>
+            </div>
+
+            <div class="property-group">
+              <label for="prop-href">이동 경로 (href)</label>
+              <input type="text" id="prop-href" placeholder="https://example.com" disabled>
+            </div>
+            
+            <div class="property-group">
+              <label for="prop-target">연결 속성 (target)</label>
+              <select id="prop-target" disabled>
+                <option value="_blank">새 창 (_blank)</option>
+                <option value="_self">현재 창 (_self)</option>
+                <option value="_parent">부모 창 (_parent)</option>
+                <option value="_top">최상위 창 (_top)</option>
+              </select>
+            </div>
+            
+            <div class="property-group">
+              <label for="prop-alt">대체 텍스트 (alt)</label>
+              <input type="text" id="prop-alt" placeholder="설명문 입력" disabled>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Live Generated HTML Code -->
+        <div class="panel-section code-section">
+          <div class="panel-section-header">
+            <h3><i class="ri-code-s-slash-line"></i> HTML 소스코드</h3>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-apply-code" class="panel-action-btn" title="코드 수정사항 적용 (Ctrl+Enter)" disabled>
+                <i class="ri-play-line"></i>
+              </button>
+              <button id="btn-copy-code" class="panel-action-btn" title="코드 복사">
+                <i class="ri-file-copy-line"></i>
+              </button>
+            </div>
+          </div>
+          <div class="code-container">
+            <textarea id="code-output" class="code-textarea" spellcheck="false" placeholder="이미지맵 코드가 실시간으로 생성됩니다"></textarea>
+          </div>
+          <div class="export-options-container">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-rwd" checked>
+              <span>반응형 이미지맵 지원 스크립트 포함</span>
+            </label>
+          </div>
+        </div>
+      </aside>
+      
+    </main>
+    
+    <!-- Footer / Status Bar -->
+    <footer class="app-statusbar">
+      <div class="status-item status-info">
+        <i class="ri-info-card-line"></i>
+        <span id="status-message">대기 중...</span>
+      </div>
+      <div class="status-right">
+        <div class="status-item">
+          <i class="ri-aspect-ratio-line"></i>
+          <span id="status-dimensions">크기: - x - px</span>
+        </div>
+        <div class="status-item">
+          <i class="ri-focus-3-line"></i>
+          <span id="status-coords">X: 0, Y: 0</span>
+        </div>
+      </div>
+    </footer>
+    
+  </div>
+
+  <!-- Network Image URL Load Modal Dialog -->
+  <div class="modal" id="modal-url">
+    <div class="modal-backdrop" id="modal-url-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>온라인 이미지 불러오기</h3>
+        <button class="modal-close" id="modal-url-close"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="input-img-url">이미지 URL 주소</label>
+          <input type="url" id="input-img-url" placeholder="https://example.com/image.jpg" required>
+          <span class="helper-text">http:// 또는 https:// 형식의 올바른 이미지 주소를 입력해 주세요.</span>
+        </div>
+        <div class="error-msg-box" id="url-error-box" style="display: none;">
+          <i class="ri-error-warning-line"></i>
+          <span id="url-error-msg">에러 메시지</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="modal-url-btn-cancel">취소</button>
+        <button class="btn primary" id="modal-url-btn-load">로드하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file inputs for Web Mode Fallback -->
+  <input type="file" id="web-file-input" accept="image/*" style="display: none;">
+  <input type="file" id="web-project-input" accept=".json" style="display: none;">
+
+  <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>

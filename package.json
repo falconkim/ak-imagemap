@@ -1,0 +1,44 @@
+{
+  "name": "ak-imagemap",
+  "version": "1.0.0",
+  "description": "Desktop Image Map Editor",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "electron . --no-sandbox --disable-gpu --disable-software-rasterizer",
+    "dist": "vite build && electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3",
+    "vite": "^8.0.16"
+  },
+  "build": {
+    "appId": "com.ak.imagemap",
+    "productName": "Image Map Editor",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "main.js",
+      "preload.js",
+      "package.json"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "include": "installer.nsh"
+    }
+  }
+}
