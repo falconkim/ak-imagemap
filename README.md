@@ -4,19 +4,6 @@
 
 ---
 
-## 💾 다운로드 및 즉시 실행 (Download & Run)
-
-개발 환경을 구축하지 않고도 데스크톱 애플리케이션 설치 파일을 직접 다운로드하여 바로 실행할 수 있습니다.
-
-1. **설치 파일 다운로드:**
-   * [GitHub Releases 페이지](https://github.com/falconkim/ak-imagemap/releases)에서 최신 버전의 **`Image Map Editor Setup 1.0.0.exe`** 설치 파일을 다운로드합니다.
-   * 또는 이 저장소에 업로드된 [dist-electron/Image Map Editor Setup 1.0.0.exe](https://github.com/falconkim/ak-imagemap/blob/main/dist-electron/Image%20Map%20Editor%20Setup%201.0.0.exe) 링크를 클릭하여 우측의 **Download** 버튼을 눌러 내려받을 수 있습니다.
-2. **설치 및 실행:**
-   * 다운로드한 `Image Map Editor Setup 1.0.0.exe` 파일을 더블클릭하여 설치를 진행합니다.
-   * **자동 업데이트 감지:** 이미 이전 버전의 프로그램이 설치되어 있는 경우, 설치 프로그램이 기존 설치 상태를 자동으로 감지하고 새 버전을 안내하는 확인 창을 표시하여 안전하게 업데이트를 완료해 줍니다.
-
----
-
 ## ✨ 주요 기능 명세
 
 ### 1. 3가지 영역 형태의 시각적 드로잉

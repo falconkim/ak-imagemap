@@ -157,10 +157,10 @@
 
 ## 23. Upload Release Build & Update README (Iteration 5)
 - [x] 23-1. Coordinate with the user who will upload the binary (`Image Map Editor Setup 1.0.0.exe`) directly.
-- [x] 23-2. Update `README.md` to add a direct download and installation section so users can easily run the application.
-- [x] 23-3. Verify `README.md` updates and document results.
+- [x] 23-2. Revert `README.md` download changes as uploading the large binary is aborted due to GitHub file size limits.
+- [x] 23-3. Verify `README.md` is reverted back to the clean version and commit the change.
 
 ## 24. Project Review & Results (Iteration 5)
-- **Direct Download Integration**: Added a dedicated `💾 다운로드 및 즉시 실행 (Download & Run)` section near the top of [README.md](file:///E:/NODE_ROOT/ak-imagemap/README.md) to serve as a prominent quickstart.
-- **GitHub Link Mapping**: Included links targeting both the GitHub Releases page and the direct repository binary file path (`dist-electron/Image Map Editor Setup 1.0.0.exe`) so users can download it smoothly whichever way the user decides to publish it.
-- **Setup Guidance**: Outlined clear, step-by-step instructions for running the executable installer and highlighted the custom automated update check behavior to improve end-user onboarding.
+- **Binary Upload Decision**: Aborted uploading the installer executable (`Image Map Editor Setup 1.0.0.exe`) directly to the repository or release, as it exceeds GitHub's size limitations and would bloat repo history.
+- **Reversion**: Reverted [README.md](file:///E:/NODE_ROOT/ak-imagemap/README.md) changes to clean up references to the offline installers.
+
