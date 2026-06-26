@@ -147,3 +147,10 @@
 - **1600px Toolbar Text Breakpoint**: Modified the media queries in [style.css](file:///E:/NODE_ROOT/ak-imagemap/src/css/style.css) to hide button text labels and the Map ID input text label below 1600px screen width. This allows the application toolbar to occupy minimal horizontal space, preventing any overlapping on smaller monitors.
 - **Build Verification**: Compiled assets successfully using Vite, producing clean production files in `dist/`.
 
+## 21. GitHub Guide & Exclusion (Iteration 4)
+- [x] 21-1. Create `GITHUB_GUIDE.md` containing the step-by-step GitHub upload guide, fork-and-pull-request model explanation, and PR code review methods.
+- [x] 21-2. Exclude `GITHUB_GUIDE.md` in `.gitignore` so it is not pushed to the public repository.
+
+## 22. Project Review & Results (Iteration 4)
+- **Local GitHub Guide Creation**: Compiled the instructions regarding initial git initialization, staging rules, licensing, and pull request testing methods into a dedicated [GITHUB_GUIDE.md](file:///E:/NODE_ROOT/ak-imagemap/GITHUB_GUIDE.md) document at the root of the project.
+- **Git Excludes List Integration**: Appended `GITHUB_GUIDE.md` to the [.gitignore](file:///E:/NODE_ROOT/ak-imagemap/.gitignore) rules, ensuring this local documentation reference is kept exclusively for local development and not uploaded publicly to GitHub.
