@@ -154,3 +154,13 @@
 ## 22. Project Review & Results (Iteration 4)
 - **Local GitHub Guide Creation**: Compiled the instructions regarding initial git initialization, staging rules, licensing, and pull request testing methods into a dedicated [GITHUB_GUIDE.md](file:///E:/NODE_ROOT/ak-imagemap/GITHUB_GUIDE.md) document at the root of the project.
 - **Git Excludes List Integration**: Appended `GITHUB_GUIDE.md` to the [.gitignore](file:///E:/NODE_ROOT/ak-imagemap/.gitignore) rules, ensuring this local documentation reference is kept exclusively for local development and not uploaded publicly to GitHub.
+
+## 23. Upload Release Build & Update README (Iteration 5)
+- [x] 23-1. Coordinate with the user who will upload the binary (`Image Map Editor Setup 1.0.0.exe`) directly.
+- [x] 23-2. Update `README.md` to add a direct download and installation section so users can easily run the application.
+- [x] 23-3. Verify `README.md` updates and document results.
+
+## 24. Project Review & Results (Iteration 5)
+- **Direct Download Integration**: Added a dedicated `💾 다운로드 및 즉시 실행 (Download & Run)` section near the top of [README.md](file:///E:/NODE_ROOT/ak-imagemap/README.md) to serve as a prominent quickstart.
+- **GitHub Link Mapping**: Included links targeting both the GitHub Releases page and the direct repository binary file path (`dist-electron/Image Map Editor Setup 1.0.0.exe`) so users can download it smoothly whichever way the user decides to publish it.
+- **Setup Guidance**: Outlined clear, step-by-step instructions for running the executable installer and highlighted the custom automated update check behavior to improve end-user onboarding.
